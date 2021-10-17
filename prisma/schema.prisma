@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id        String   @id @default(cuid()) // cjld2cjxh0000qzrmn831i7rn
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  name        String
+  description String?
+  price       Decimal @db.Decimal(4, 2)
+  sky         String  @unique
+  published   Boolean @default(false) @db.Bit
+}
